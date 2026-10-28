@@ -21,8 +21,14 @@ config/filepaths.yaml
 config/filepaths.*.yaml
 !config/filepaths.example.yaml
 
-# Executed notebook copies written by the test runner.
+# Executed notebook copies written by the test runner, and anything a notebook writes
+# next to itself. Notebook outputs are regenerated, never committed.
 notebooks/_executed/
+notebooks/*.png
+notebooks/*.pdf
+notebooks/*.svg
+notebooks/*.csv
+notebooks/*.tsv
 
 .pixi/
 .venv/
