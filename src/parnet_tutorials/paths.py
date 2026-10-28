@@ -138,3 +138,108 @@ def task_names(key: str, root: pathlib.Path | None = None) -> list[str]:
         raise FileNotFoundError(f'No task config {path}. Available: {available}')
     payload = yaml.safe_load(path.read_text())
     return list(payload['tasks'])
+
+
+def model_config(key: str, root: pathlib.Path | None = None) -> dict[str, Any]:
+    """Read one model's entry from ``config/models.yaml``.
+
+    Args:
+        key: Model key, for example ``"parnet-3m-pretrain-E2"``.
+        root: Project root; discovered from the working directory when omitted.
+
+    Returns:
+        The model's entry, with its task-config key, task count, cell types and named
+        tracks.
+
+    Raises:
+        KeyError: If the model is not registered, listing the ones that are.
+    """
+    root = root or project_root()
+    payload = yaml.safe_load((root / 'config' / 'models.yaml').read_text())
+    models = payload['models']
+    if key not in models:
+        raise KeyError(f'{key!r} is not in config/models.yaml. Known: {sorted(models)}')
+    return models[key]
+
+
+def model_tasks(key: str, root: pathlib.Path | None = None) -> list[str]:
+    """Ordered task names of the axis a given model emits.
+
+    Args:
+        key: Model key, for example ``"parnet-21m-penalty5"``.
+        root: Project root; discovered from the working directory when omitted.
+
+    Returns:
+        Task names in output order.
+
+    Raises:
+        ValueError: If the task list length disagrees with the registered task count,
+            which means one of the two files has drifted.
+    """
+    entry = model_config(key, root)
+    tasks = task_names(entry['tasks'], root)
+    if len(tasks) != entry['n_tasks']:
+        raise ValueError(
+            f'{key}: config/models.yaml says {entry["n_tasks"]} tasks but '
+            f'config/tasks/{entry["tasks"]}.yaml lists {len(tasks)}'
+        )
+    return tasks
+
+
+def demo_track(key: str, role: str = 'default', root: pathlib.Path | None = None) -> str:
+    """Name of the track a notebook should show for a given model.
+
+    Notebooks ask for a role rather than naming a track, because which tracks exist
+    depends on the model. The 21M emits 223 ENCODE tracks over both cell types; each 3M
+    backbone emits only its split's training RBPs, all HepG2. A hardcoded name is a hidden
+    assumption about which model is loaded, and swapping the model turns it into a wrong
+    label or an index error.
+
+    Args:
+        key: Model key, for example ``"parnet-3m-pretrain-E3"``.
+        role: Which track to use, ``"default"`` or an ``"alternate_N"``.
+        root: Project root; discovered from the working directory when omitted.
+
+    Returns:
+        The track name, checked to be on that model's output axis.
+
+    Raises:
+        KeyError: If the role is not defined for this model.
+        ValueError: If the configured track is not on the model's axis.
+    """
+    entry = model_config(key, root)
+    tracks = entry['tracks']
+    if role not in tracks:
+        raise KeyError(f'{key} has no track role {role!r}. Defined: {sorted(tracks)}')
+    name = tracks[role]
+    tasks = model_tasks(key, root)
+    if name not in tasks:
+        raise ValueError(f'{key}: configured track {name!r} is not on its {len(tasks)}-task axis')
+    return name
+
+
+def track_index(key: str, track: str, root: pathlib.Path | None = None) -> int:
+    """Position of a track on a model's output axis.
+
+    Args:
+        key: Model key.
+        track: Track name, for example ``"HNRNPC_HepG2"``.
+        root: Project root; discovered from the working directory when omitted.
+
+    Returns:
+        Index into the model's task axis.
+
+    Raises:
+        ValueError: If the model does not emit that track, naming the cell types it covers
+            so the usual cause -- asking a HepG2-only backbone for a K562 track -- is
+            visible immediately.
+    """
+    tasks = model_tasks(key, root)
+    try:
+        return tasks.index(track)
+    except ValueError:
+        entry = model_config(key, root)
+        raise ValueError(
+            f'{key} does not emit {track!r}. It has {len(tasks)} tasks covering '
+            f'{entry["cell_types"]}.'
+        ) from None

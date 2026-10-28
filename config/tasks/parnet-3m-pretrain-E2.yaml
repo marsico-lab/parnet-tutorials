@@ -1,0 +1,113 @@
+# Generated from results/signal_datasets/E2/rbp_cts.tsv in
+# parnet--train--rbp-generalization. Do not sort: this is the output order.
+#
+# The E2 backbone was pretrained on this split's TRAINING RBPs only, all HepG2.
+# The split also defines held-out "similar" and "different" RBPs, which this model
+# does NOT emit; see config/splits in the training repo for those.
+source_axis: parnet-3m-pretrain-E2 output axis (51 tasks)
+n_tasks: 51
+cell_types: [HepG2]
+tasks:
+  - AKAP1_HepG2
+  - AQR_HepG2
+  - CDC40_HepG2
+  - CSTF2_HepG2
+  - DDX55_HepG2
+  - DDX59_HepG2
+  - DGCR8_HepG2
+  - DKC1_HepG2
+  - DROSHA_HepG2
+  - FKBP4_HepG2
+  - FUBP3_HepG2
+  - FUS_HepG2
+  - GRSF1_HepG2
+  - GTF2F1_HepG2
+  - HNRNPC_HepG2
+  - HNRNPL_HepG2
+  - HNRNPM_HepG2
+  - HNRNPUL1_HepG2
+  - IGF2BP1_HepG2
+  - IGF2BP3_HepG2
+  - KHSRP_HepG2
+  - LIN28B_HepG2
+  - MATR3_HepG2
+  - NCBP2_HepG2
+  - NKRF_HepG2
+  - NOLC1_HepG2
+  - PCBP1_HepG2
+  - PCBP2_HepG2
+  - PRPF8_HepG2
+  - PTBP1_HepG2
+  - RBFOX2_HepG2
+  - RBM15_HepG2
+  - RBM5_HepG2
+  - RPS3_HepG2
+  - SAFB_HepG2
+  - SF3A3_HepG2
+  - SF3B4_HepG2
+  - SFPQ_HepG2
+  - SLTM_HepG2
+  - SRSF1_HepG2
+  - SRSF9_HepG2
+  - STAU2_HepG2
+  - SUGP2_HepG2
+  - TAF15_HepG2
+  - TIA1_HepG2
+  - TIAL1_HepG2
+  - U2AF1_HepG2
+  - U2AF2_HepG2
+  - UPF1_HepG2
+  - XPO5_HepG2
+  - ZC3H11A_HepG2
+ct:
+  AKAP1_HepG2: HepG2
+  AQR_HepG2: HepG2
+  CDC40_HepG2: HepG2
+  CSTF2_HepG2: HepG2
+  DDX55_HepG2: HepG2
+  DDX59_HepG2: HepG2
+  DGCR8_HepG2: HepG2
+  DKC1_HepG2: HepG2
+  DROSHA_HepG2: HepG2
+  FKBP4_HepG2: HepG2
+  FUBP3_HepG2: HepG2
+  FUS_HepG2: HepG2
+  GRSF1_HepG2: HepG2
+  GTF2F1_HepG2: HepG2
+  HNRNPC_HepG2: HepG2
+  HNRNPL_HepG2: HepG2
+  HNRNPM_HepG2: HepG2
+  HNRNPUL1_HepG2: HepG2
+  IGF2BP1_HepG2: HepG2
+  IGF2BP3_HepG2: HepG2
+  KHSRP_HepG2: HepG2
+  LIN28B_HepG2: HepG2
+  MATR3_HepG2: HepG2
+  NCBP2_HepG2: HepG2
+  NKRF_HepG2: HepG2
+  NOLC1_HepG2: HepG2
+  PCBP1_HepG2: HepG2
+  PCBP2_HepG2: HepG2
+  PRPF8_HepG2: HepG2
+  PTBP1_HepG2: HepG2
+  RBFOX2_HepG2: HepG2
+  RBM15_HepG2: HepG2
+  RBM5_HepG2: HepG2
+  RPS3_HepG2: HepG2
+  SAFB_HepG2: HepG2
+  SF3A3_HepG2: HepG2
+  SF3B4_HepG2: HepG2
+  SFPQ_HepG2: HepG2
+  SLTM_HepG2: HepG2
+  SRSF1_HepG2: HepG2
+  SRSF9_HepG2: HepG2
+  STAU2_HepG2: HepG2
+  SUGP2_HepG2: HepG2
+  TAF15_HepG2: HepG2
+  TIA1_HepG2: HepG2
+  TIAL1_HepG2: HepG2
+  U2AF1_HepG2: HepG2
+  U2AF2_HepG2: HepG2
+  UPF1_HepG2: HepG2
+  XPO5_HepG2: HepG2
+  ZC3H11A_HepG2: HepG2

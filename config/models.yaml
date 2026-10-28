@@ -1,0 +1,42 @@
+# Which task axis each model emits, and which track the notebooks should show.
+#
+# Notebooks must not hardcode a track name. Valid tracks depend on the model: the 21M
+# emits 223 ENCODE tracks across both cell types, each 3M backbone only its split's
+# training RBPs, all HepG2. Ask for a role here instead, via
+# parnet_tutorials.demo_track(model_key, role).
+#
+# default_track is the best-predicted track the model can actually emit, taken from a
+# preference list ranked on the released 21M's median per-transcript Pearson over MANE
+# test transcripts (tracks with >=200 transcripts passing coverage).
+models:
+  parnet-21m-penalty5:
+    tasks: encode-223
+    n_tasks: 223
+    cell_types: [HepG2, K562]
+    tracks:
+      default: HNRNPC_HepG2
+      alternate_1: U2AF2_HepG2
+      alternate_2: PRPF8_HepG2
+  parnet-3m-pretrain-E2:
+    tasks: parnet-3m-pretrain-E2
+    n_tasks: 51
+    cell_types: [HepG2]
+    tracks:
+      default: HNRNPC_HepG2
+      alternate_1: U2AF2_HepG2
+      alternate_2: PRPF8_HepG2
+  parnet-3m-pretrain-E3:
+    tasks: parnet-3m-pretrain-E3
+    n_tasks: 53
+    cell_types: [HepG2]
+    tracks:
+      default: U2AF2_HepG2
+      alternate_1: PRPF8_HepG2
+  parnet-3m-pretrain-E4:
+    tasks: parnet-3m-pretrain-E4
+    n_tasks: 55
+    cell_types: [HepG2]
+    tracks:
+      default: HNRNPC_HepG2
+      alternate_1: PRPF8_HepG2
+      alternate_2: STAU2_HepG2
