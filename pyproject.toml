@@ -8,10 +8,19 @@ version = "0.1.0"
 description = "Tutorial notebooks for PARNET"
 requires-python = ">=3.10"
 dependencies = [
+  # The library the tutorials are about. Installed from the refactor branch until it is
+  # merged; pin a tag here once there is one.
+  "parnet @ git+https://github.com/marsico-lab/parnet-marsico-lab.git@refactor",
+  # No upper bound: models load from safetensors rather than from a pickle, so a newer
+  # torch cannot silently fail to reconstruct them.
+  "torch>=2.0",
   "pyyaml>=6.0",
   "numpy>=1.26",
   "pandas>=2.0",
   "matplotlib>=3.7",
+  # AUROC and AUPRC in the fine-tuning notebook.
+  "scikit-learn>=1.3",
+  "jupyterlab>=4.0",
 ]
 
 [project.optional-dependencies]

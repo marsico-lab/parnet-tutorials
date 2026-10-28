@@ -30,6 +30,9 @@ datasets:
 # Binary classification datasets (uint8 sequence + bool labels), used by the
 # fine-tuning notebook because they are small enough for a shared machine.
 classification:
+  peaks_train: /path/to/tutorial_classification/train.pt
+  peaks_valid: /path/to/tutorial_classification/valid.pt
+  peaks_test: /path/to/tutorial_classification/test.pt
   hepg2_train: resources/datasets/classification/train.pt
   hepg2_valid: resources/datasets/classification/valid.pt
   hepg2_test: resources/datasets/classification/test.pt
@@ -38,3 +41,6 @@ classification:
 # to the k-mer table if metamotif is not installed.
 tools:
   metamotif_examples: null
+
+resources:
+  tutorial_peaks: /path/to/parnet-tutorial-data/peaks

@@ -1,0 +1,7 @@
+# Extra packages for notebook 6's motif section.
+#
+#   pip install -r requirements-motifs.txt
+
+metamotif @ git+https://github.com/lambosaur/metamotif.git
+umap-learn>=0.5
+logomaker>=0.8
