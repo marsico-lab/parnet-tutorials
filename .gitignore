@@ -1,0 +1,32 @@
+# Data, models and outputs are never committed. They are materialised per machine
+# and reached through config/filepaths.yaml. See README "Paths".
+resources/
+results/
+data/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.npy
+*.npz
+*.bw
+*.bigWig
+*.bam
+*.fasta
+*.fa
+
+# Machine-specific paths config. Only the example is committed: on each machine copy it
+# to config/filepaths.<machine>.yaml and symlink config/filepaths.yaml to that file.
+config/filepaths.yaml
+config/filepaths.*.yaml
+!config/filepaths.example.yaml
+
+# Executed notebook copies written by the test runner.
+notebooks/_executed/
+
+.pixi/
+.venv/
+**/__pycache__/
+*.py[cod]
+.ipynb_checkpoints
+.pytest_cache/

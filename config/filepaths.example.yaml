@@ -1,0 +1,40 @@
+# config/filepaths.<your-machine>.yaml
+#
+# Every notebook in this repository reads the fixed name config/filepaths.yaml and never
+# contains an absolute path. Set this up once per machine:
+#
+#   cp config/filepaths.example.yaml config/filepaths.$(hostname -s).yaml
+#   # edit the copy so the paths below exist on this machine
+#   cd config && ln -sf filepaths.$(hostname -s).yaml filepaths.yaml
+#
+# Both the per-machine file and the symlink are gitignored; only this example is committed.
+#
+# Relative paths resolve from the project root (the directory holding pyproject.toml).
+# Absolute paths are used as they are, which is what you want for shared or scratch storage.
+
+# Re-exported models: each entry is a stem, and the loader appends .safetensors and
+# .config.json. Produced by the refactor branch's export step; never committed here.
+models:
+  parnet-21m-penalty5: resources/models/parnet-21m-penalty5
+  parnet-3m-pretrain-E2: resources/models/parnet-3m-pretrain-E2
+  parnet-3m-pretrain-E3: resources/models/parnet-3m-pretrain-E3
+  parnet-3m-pretrain-E4: resources/models/parnet-3m-pretrain-E4
+
+# Signal datasets (sparse COO eCLIP profiles, 600 nt windows).
+datasets:
+  subset_hepg2: resources/datasets/subset-hepg2.pt
+  subset_hepg2_testonly: resources/datasets/subset-hepg2-testonly.pt
+  subset_k562: resources/datasets/subset-k562.pt
+  full_corrected: resources/datasets/encode.filtered.chr16-train-only.pt
+
+# Binary classification datasets (uint8 sequence + bool labels), used by the
+# fine-tuning notebook because they are small enough for a shared machine.
+classification:
+  hepg2_train: resources/datasets/classification/train.pt
+  hepg2_valid: resources/datasets/classification/valid.pt
+  hepg2_test: resources/datasets/classification/test.pt
+
+# Optional. Only the interpretation notebook needs this, and it degrades gracefully
+# to the k-mer table if metamotif is not installed.
+tools:
+  metamotif_examples: null
