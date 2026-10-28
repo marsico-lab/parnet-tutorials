@@ -19,7 +19,7 @@ dependencies = [
 run = ["nbclient>=0.9", "nbformat>=5.9", "ipykernel>=6"]
 # Individual notebooks declare what they additionally need; see each notebook's first cell.
 embeddings = ["umap-learn>=0.5", "scikit-learn>=1.3"]
-motifs = ["logomaker>=0.8"]
+motifs = ["logomaker>=0.8", "metamotif @ git+https://github.com/project-parnet/metamotif.git"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
